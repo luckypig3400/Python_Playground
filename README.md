@@ -33,6 +33,10 @@ pip install requests
 pip install lxml
 ```
 
+**關於要安裝lxml套件是在這裡找到的**
+
++ https://ithelp.ithome.com.tw/articles/10186119
+
 ---
 
 
