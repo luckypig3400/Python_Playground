@@ -1,5 +1,7 @@
 import datetime
+import time
 from selenium import webdriver
+# https://chromedriver.chromium.org/getting-started
 
 driver = webdriver.Chrome('C:\\[Git_Repos]\\Python_Playground\\chromeDriver-win32\\chromedriver.exe')
 
@@ -13,3 +15,6 @@ for i in range(365):
 
 url = 'https://e-service.cwb.gov.tw/HistoryDataQuery/DayDataController.do?command=viewMain&station=466920&stname=%25E8%2587%25BA%25E5%258C%2597&datepicker=2021-05-20#'
 driver.get(url)
+time.sleep(1)
+
+driver.close()
