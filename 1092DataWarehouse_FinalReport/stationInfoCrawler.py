@@ -9,7 +9,20 @@ driver.get(url)
 time.sleep(3)
 
 citySelectBox = driver.find_element_by_id('stationCounty')
+cityOptions = [x for x in citySelectBox.find_elements_by_tag_name("option")]
+# https://stackoverflow.com/questions/18515692/listing-select-option-values-with-selenium-and-python/18516161
+
+for element in cityOptions:
+    print(element.get_attribute("value"))
+
+    # https://stackoverflow.com/questions/50136361/find-element-by-value-selenium-python
+    driver.find_element_by_xpath("//select[@id='stationCounty']/option[@value='桃園市']").click()
+    # https://stackoverflow.com/questions/7867537/how-to-select-a-drop-down-menu-value-with-selenium-using-python
+
+    time.sleep(1)
+
 stationSelectBox = driver.find_element_by_id('station')
+
 
 time.sleep(3)
 driver.close()
