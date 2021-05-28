@@ -1,18 +1,7 @@
 import datetime
 import time
 from selenium import webdriver
-
 # https://chromedriver.chromium.org/getting-started
-
-options = webdriver.ChromeOptions()
-prefs = {'download.default_directory': 'C:\\WeatherData'}
-options.add_experimental_option('prefs', prefs)
-# https://stackoverflow.com/questions/35331854/downloading-a-file-at-a-specified-location-through-python-and-selenium-using-chr
-driver = webdriver.Chrome('C:\\[Git_Repos]\\Python_Playground\\chromeDriver-win32\\chromedriver.exe',
-                          options=options)
-
-startDate = datetime.datetime(2020, 1, 1)
-# https://www.w3schools.com/python/python_datetime.asp
 
 taipeiStations = [
     ['466910_鞍部', 'viewMain&station=466910&stname=%25E9%259E%258D%25E9%2583%25A8']
@@ -75,26 +64,39 @@ newTaipeiStations = [
     ['C1A9N0_四十份', 'viewMain&station=C1A9N0&stname=%25E5%259B%259B%25E5%258D%2581%25E4%25BB%25BD']
 ]
 
+
+
+options = webdriver.ChromeOptions()
+prefs = {'download.default_directory': 'C:\\WeatherData'}
+options.add_experimental_option('prefs', prefs)
+# https://stackoverflow.com/questions/35331854/downloading-a-file-at-a-specified-location-through-python-and-selenium-using-chr
+driver = webdriver.Chrome('C:\\[Git_Repos]\\Python_Playground\\chromeDriver-win32\\chromedriver.exe',
+                          options=options)
+
+startDate = datetime.datetime(2020, 1, 1)
+# https://www.w3schools.com/python/python_datetime.asp
+
 for i in range(len(newTaipeiStations)):
     stationName = newTaipeiStations[i][0]
     queryParameters = newTaipeiStations[i][1]
 
     print(stationName + '的資料抓取參數為:' + queryParameters)
 
-"""
-for i in range(365):
-    dateString = str(startDate.date())
-    print('Current crawling:' + dateString)
+    # 以下開始抓取該站點1年份的資料
+    for fetchCount in range(365):
+        dateString = str(startDate.date())
+        print('Current crawling:' + dateString)
 
-    url = 'https://e-service.cwb.gov.tw/HistoryDataQuery/DayDataController.do?command=viewMain&station=466920&stname=%25E8%2587%25BA%25E5%258C%2597&datepicker=' + dateString
-    driver.get(url)
+        url = 'https://e-service.cwb.gov.tw/HistoryDataQuery/DayDataController.do?command=viewMain&station=466920&stname=%25E8%2587%25BA%25E5%258C%2597&datepicker=' + dateString
+        driver.get(url)
 
-    csvFile = driver.find_element_by_id('downloadCSV')
-    csvFile.click()
-    time.sleep(0.3)
+        csvFile = driver.find_element_by_id('downloadCSV')
+        csvFile.click()
+        time.sleep(0.3)
 
-    startDate += datetime.timedelta(days=1)
-    # https://stackoverflow.com/questions/3240458/how-to-increment-a-datetime-by-one-day
+        startDate += datetime.timedelta(days=1)
+        # https://stackoverflow.com/questions/3240458/how-to-increment-a-datetime-by-one-day
 
-driver.close()
-"""
+    driver.close()
+
+print("成功抓取全部台北氣象測站1年份的資料")
