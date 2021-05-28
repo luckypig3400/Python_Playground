@@ -87,7 +87,7 @@ for i in range(len(taipeiStations)):
         dateString = str(startDate.date())
         # print('Current crawling:' + dateString)
 
-        url = 'https://e-service.cwb.gov.tw/HistoryDataQuery/DayDataController.do?command=viewMain&station=466920&stname=%25E8%2587%25BA%25E5%258C%2597&datepicker=' + dateString
+        url = 'https://e-service.cwb.gov.tw/HistoryDataQuery/DayDataController.do?command=' + queryParameters + '&datepicker=' + dateString
         driver.get(url)
 
         csvFile = driver.find_element_by_id('downloadCSV')
