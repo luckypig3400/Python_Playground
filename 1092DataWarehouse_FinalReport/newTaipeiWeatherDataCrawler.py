@@ -83,4 +83,4 @@ for i in range(len(newTaipeiStations)):
     driver.close()
     print("已成功抓取站點:" + stationName + "指定份數的每日資料")
 
-print("成功抓取全部新北市氣象測站自設定的日期以來往後"+totalDaysYouWannaFetch+"份的資料")
+print("成功抓取全部新北市氣象測站自設定的日期以來往後" + str(totalDaysYouWannaFetch) + "份的資料")
