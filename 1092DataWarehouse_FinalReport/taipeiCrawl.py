@@ -5,10 +5,11 @@ from selenium import webdriver
 # https://chromedriver.chromium.org/getting-started
 
 options = webdriver.ChromeOptions()
-options.add_argument('download.default_directory=C:/WeatherData')
+prefs = {'download.default_directory': 'C:\\WeatherData'}
+options.add_experimental_option('prefs', prefs)
 # https://stackoverflow.com/questions/35331854/downloading-a-file-at-a-specified-location-through-python-and-selenium-using-chr
 driver = webdriver.Chrome('C:\\[Git_Repos]\\Python_Playground\\chromeDriver-win32\\chromedriver.exe',
-                          chrome_options=options)
+                          options=options)
 
 startDate = datetime.datetime(2020, 1, 1)
 # https://www.w3schools.com/python/python_datetime.asp
