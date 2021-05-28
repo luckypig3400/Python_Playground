@@ -47,13 +47,13 @@ newTaipeiStations = [
     ['C1A9N0_四十份', 'viewMain&station=C1A9N0&stname=%25E5%259B%259B%25E5%258D%2581%25E4%25BB%25BD']
 ]
 
-for i in range(len(taipeiStations)):
-    stationName = taipeiStations[i][0]
-    queryParameters = taipeiStations[i][1]
+for i in range(len(newTaipeiStations)):
+    stationName = newTaipeiStations[i][0]
+    queryParameters = newTaipeiStations[i][1]
 
     print(stationName + '的資料抓取參數為:' + queryParameters)
 
-    downloadSavePath = 'C:\\WeatherData\\Taipei\\' + stationName  # 針對不同站點儲存在不同資料夾
+    downloadSavePath = 'C:\\WeatherData\\newTaipei\\' + stationName  # 針對不同站點儲存在不同資料夾
     options = webdriver.ChromeOptions()
     prefs = {'download.default_directory': downloadSavePath}
     options.add_experimental_option('prefs', prefs)
@@ -82,4 +82,4 @@ for i in range(len(taipeiStations)):
     driver.close()
     print("已成功抓取站點:" + stationName + "指定份數的每日資料")
 
-print("成功抓取全部台北氣象測站1年份的資料")
+print("成功抓取全部新北市氣象測站1年份的資料")
