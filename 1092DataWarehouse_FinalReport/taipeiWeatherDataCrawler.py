@@ -37,9 +37,10 @@ for i in range(len(taipeiStations)):
 
     startDate = datetime.datetime(2020, 1, 1)  # 設定要抓取資料的日期起點
     # https://www.w3schools.com/python/python_datetime.asp
+    totalDaysYouWannaFetch = 365  # 設定要抓取的份數
 
     # 以下開始抓取該站點1年份的資料,可更改365為其他天數(抓取自訂的天數)
-    for fetchCount in range(365):
+    for fetchCount in range(totalDaysYouWannaFetch):
         dateString = str(startDate.date())
         # print('Current crawling:' + dateString)
 
@@ -56,4 +57,4 @@ for i in range(len(taipeiStations)):
     driver.close()
     print("已成功抓取站點:" + stationName + "指定份數的每日資料")
 
-print("成功抓取全部台北氣象測站1年份的資料")
+print("成功抓取全部台北市氣象測站自設定的日期以來往後"+totalDaysYouWannaFetch+"份的資料")
