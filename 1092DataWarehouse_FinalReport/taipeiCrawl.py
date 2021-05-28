@@ -1,6 +1,7 @@
 import datetime
 import time
 from selenium import webdriver
+
 # https://chromedriver.chromium.org/getting-started
 
 taipeiStations = [
@@ -64,28 +65,27 @@ newTaipeiStations = [
     ['C1A9N0_四十份', 'viewMain&station=C1A9N0&stname=%25E5%259B%259B%25E5%258D%2581%25E4%25BB%25BD']
 ]
 
-
-
-options = webdriver.ChromeOptions()
-prefs = {'download.default_directory': 'C:\\WeatherData'}
-options.add_experimental_option('prefs', prefs)
-# https://stackoverflow.com/questions/35331854/downloading-a-file-at-a-specified-location-through-python-and-selenium-using-chr
-driver = webdriver.Chrome('C:\\[Git_Repos]\\Python_Playground\\chromeDriver-win32\\chromedriver.exe',
-                          options=options)
-
-startDate = datetime.datetime(2020, 1, 1)
-# https://www.w3schools.com/python/python_datetime.asp
-
-for i in range(len(newTaipeiStations)):
-    stationName = newTaipeiStations[i][0]
-    queryParameters = newTaipeiStations[i][1]
+for i in range(len(taipeiStations)):
+    stationName = taipeiStations[i][0]
+    queryParameters = taipeiStations[i][1]
 
     print(stationName + '的資料抓取參數為:' + queryParameters)
 
-    # 以下開始抓取該站點1年份的資料
+    downloadSavePath = 'C:\\WeatherData\\Taipei\\' + stationName  # 針對不同站點儲存在不同資料夾
+    options = webdriver.ChromeOptions()
+    prefs = {'download.default_directory': downloadSavePath}
+    options.add_experimental_option('prefs', prefs)
+    # https://stackoverflow.com/questions/35331854/downloading-a-file-at-a-specified-location-through-python-and-selenium-using-chr
+    driver = webdriver.Chrome('C:\\[Git_Repos]\\Python_Playground\\chromeDriver-win32\\chromedriver.exe',
+                              options=options)
+
+    startDate = datetime.datetime(2020, 1, 1)  # 設定要抓取資料的日期起點
+    # https://www.w3schools.com/python/python_datetime.asp
+
+    # 以下開始抓取該站點1年份的資料,可更改365為其他天數(抓取自訂的天數)
     for fetchCount in range(365):
         dateString = str(startDate.date())
-        print('Current crawling:' + dateString)
+        # print('Current crawling:' + dateString)
 
         url = 'https://e-service.cwb.gov.tw/HistoryDataQuery/DayDataController.do?command=viewMain&station=466920&stname=%25E8%2587%25BA%25E5%258C%2597&datepicker=' + dateString
         driver.get(url)
@@ -98,5 +98,6 @@ for i in range(len(newTaipeiStations)):
         # https://stackoverflow.com/questions/3240458/how-to-increment-a-datetime-by-one-day
 
     driver.close()
+    print("已成功抓取站點:" + stationName + "指定份數的每日資料")
 
 print("成功抓取全部台北氣象測站1年份的資料")
