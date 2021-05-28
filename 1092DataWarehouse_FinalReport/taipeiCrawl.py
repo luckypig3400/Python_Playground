@@ -15,9 +15,6 @@ startDate = datetime.datetime(2020, 1, 1)
 # https://www.w3schools.com/python/python_datetime.asp
 
 for i in range(365):
-    # print(startDate)
-    startDate += datetime.timedelta(days=1)
-    # https://stackoverflow.com/questions/3240458/how-to-increment-a-datetime-by-one-day
     dateString = str(startDate.date())
     print('Current crawling:' + dateString)
 
@@ -26,6 +23,9 @@ for i in range(365):
 
     csvFile = driver.find_element_by_id('downloadCSV')
     csvFile.click()
-    time.sleep(1)
+    time.sleep(0.3)
+
+    startDate += datetime.timedelta(days=1)
+    # https://stackoverflow.com/questions/3240458/how-to-increment-a-datetime-by-one-day
 
 driver.close()
