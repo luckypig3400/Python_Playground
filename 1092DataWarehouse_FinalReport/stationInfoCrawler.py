@@ -14,6 +14,9 @@ citySelectBox = driver.find_element_by_id('stationCounty')
 cityOptions = [x for x in citySelectBox.find_elements_by_tag_name("option")]
 # https://stackoverflow.com/questions/18515692/listing-select-option-values-with-selenium-and-python/18516161
 
+print("縣市,站點名稱,經度,緯度,海拔高度,設站日期,地址,備註")
+# print columns name for csv file
+
 for element in cityOptions:
     cityName = element.get_attribute("value")
 
@@ -32,7 +35,6 @@ for element in cityOptions:
 
         for eachStation in stationOptions:
             currentStation = eachStation.get_attribute("value")
-            print(currentStation + eachStation.text)
 
             driver.find_element_by_xpath(
                 "//select[@id='station']/option[@value='" + currentStation + "']").click()
@@ -47,13 +49,9 @@ for element in cityOptions:
             address = driver.find_element_by_id('Address')  # 地址
             note = driver.find_element_by_id('WebRemark')  # 備註
 
-            print("經度:" + longitude.text)
+            print(cityName + ',' + eachStation.text + "," + longitude.text + "," + latitude.text +
+                  "," + altitude.text + "," + stationBeginTime.text + "," + address.text + "," + note.text)
             # https://stackoverflow.com/questions/48139676/how-to-get-the-value-of-an-element-in-python-selenium/48139708
-            print("緯度:" + latitude.text)
-            print("海拔高度:" + altitude.text)
-            print("設站日期" + stationBeginTime.text)
-            print("地址:" + address.text)
-            print("備註:" + note.text)
 
     time.sleep(0.6)
 
