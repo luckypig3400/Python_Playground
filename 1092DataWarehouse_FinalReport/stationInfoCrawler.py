@@ -14,8 +14,10 @@ citySelectBox = driver.find_element_by_id('stationCounty')
 cityOptions = [x for x in citySelectBox.find_elements_by_tag_name("option")]
 # https://stackoverflow.com/questions/18515692/listing-select-option-values-with-selenium-and-python/18516161
 
-print("縣市,站點名稱,經度,緯度,海拔高度,設站日期,地址,備註")
-# print columns name for csv file
+file = open("C:\\WeatherData\\station_info.csv", "a")
+# https://www.w3schools.com/python/python_file_write.asp
+file.write("縣市,站點名稱,經度,緯度,海拔高度,設站日期,地址,備註\n")
+# write columns name for csv file
 
 for element in cityOptions:
     cityName = element.get_attribute("value")
@@ -49,12 +51,21 @@ for element in cityOptions:
             address = driver.find_element_by_id('Address')  # 地址
             note = driver.find_element_by_id('WebRemark')  # 備註
 
-            print(cityName + ',' + eachStation.text + "," + longitude.text + "," + latitude.text +
-                  "," + altitude.text + "," + stationBeginTime.text + "," + address.text + "," + note.text)
+            rowData = (cityName + ',' + eachStation.text + "," + longitude.text + "," + latitude.text +
+                       "," + altitude.text + "," + stationBeginTime.text + "," + address.text + "," + note.text)
             # https://stackoverflow.com/questions/48139676/how-to-get-the-value-of-an-element-in-python-selenium/48139708
+
+            file.write(rowData + '\n')
 
     time.sleep(0.6)
 
 print("已成功擷取指定範圍的站點資訊")
 time.sleep(0.6)
 driver.close()
+
+file.close()
+print("成功寫入檔案")
+
+print("以下為檔案內容:")
+file = open("C:\\WeatherData\\station_info.csv", "r")
+print(file.read())
