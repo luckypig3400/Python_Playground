@@ -28,7 +28,7 @@ for element in cityOptions:
             "//select[@id='stationCounty']/option[@value='" + cityName + "']").click()
         # https://stackoverflow.com/questions/7867537/how-to-select-a-drop-down-menu-value-with-selenium-using-python
 
-        time.sleep(0.6)  # wait for station options loading
+        time.sleep(0)  # wait for station options loading
 
         stationSelectBox = driver.find_element_by_id('station')
         stationOptions = [
@@ -41,7 +41,7 @@ for element in cityOptions:
             driver.find_element_by_xpath(
                 "//select[@id='station']/option[@value='" + currentStation + "']").click()
 
-            time.sleep(0.3)  # wait for station info loading
+            time.sleep(0)  # wait for station info loading
 
             longitude = driver.find_element_by_id('Longitude')  # 經度
             latitude = driver.find_element_by_id('Latitude')  # 緯度
@@ -66,6 +66,6 @@ driver.close()
 file.close()
 print("成功寫入檔案")
 
-print("以下為檔案內容:")
 file = open("C:\\WeatherData\\station_info.csv", "r")
 print(file.read())
+print("以上為檔案內容，檔案儲存路徑為C:\\WeatherData\\station_info.csv")
