@@ -26,7 +26,7 @@ for element in cityOptions:
 
         stationSelectBox = driver.find_element_by_id('station')
         stationOptions = [
-            x for x in stationSelectBox.find_element_by_tag_name("option")]
+            x for x in stationSelectBox.find_elements_by_tag_name("option")]
         # 上面兩行找出該縣市所有的測站選項
 
         for eachStation in stationOptions:
