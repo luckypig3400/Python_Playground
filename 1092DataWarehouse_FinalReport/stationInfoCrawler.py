@@ -1,3 +1,4 @@
+from logging import currentframe
 from selenium import webdriver
 import time
 
@@ -30,10 +31,32 @@ for element in cityOptions:
         # 上面兩行找出該縣市所有的測站選項
 
         for eachStation in stationOptions:
-            print(eachStation.get_attribute("value"))
+            currentStation = eachStation.get_attribute("value")
+            print(currentStation + eachStation.text)
+
+            driver.find_element_by_xpath(
+                "//select[@id='station']/option[@value='" + currentStation + "']").click()
+
+            time.sleep(0.3)  # wait for station info loading
+
+            longitude = driver.find_element_by_id('Longitude')  # 經度
+            latitude = driver.find_element_by_id('Latitude')  # 緯度
+            altitude = driver.find_element_by_id('Altitde')  # 海拔高度
+            stationBeginTime = driver.find_element_by_id(
+                'StnBeginTime')  # 設站日期
+            address = driver.find_element_by_id('Address')  # 地址
+            note = driver.find_element_by_id('WebRemark')  # 備註
+
+            print("經度:" + longitude.text)
+            # https://stackoverflow.com/questions/48139676/how-to-get-the-value-of-an-element-in-python-selenium/48139708
+            print("緯度:" + latitude.text)
+            print("海拔高度:" + altitude.text)
+            print("設站日期" + stationBeginTime.text)
+            print("地址:" + address.text)
+            print("備註:" + note.text)
 
     time.sleep(0.6)
 
-
-time.sleep(3)
+print("已成功擷取指定範圍的站點資訊")
+time.sleep(0.6)
 driver.close()
