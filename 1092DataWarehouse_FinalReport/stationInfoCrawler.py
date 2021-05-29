@@ -22,7 +22,7 @@ file.write("縣市,站點名稱,經度,緯度,海拔高度,設站日期,地址,�
 for element in cityOptions:
     cityName = element.get_attribute("value")
 
-    if cityName == '臺北市' or cityName == '新北市':
+    if cityName != '':  # 可在此行設定要抓取的縣市名
         # https://stackoverflow.com/questions/50136361/find-element-by-value-selenium-python
         driver.find_element_by_xpath(
             "//select[@id='stationCounty']/option[@value='" + cityName + "']").click()
