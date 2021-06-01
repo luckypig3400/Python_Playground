@@ -30,7 +30,9 @@ mergedFile.write(u"\"StnName\",\"ObsDate\",\"ObsTime\",\"StnPres\",\"SeaPres\",\
 for fileName in onlyfiles:
     print(fileName)
 
-    if fileName != mergedFileName or fileName != "mergeCSV.py":
+    if fileName == (currentDirName + "Merged.csv") or fileName == "mergeCSV.py":
+        print("Not Weather Data")
+    else:
         unmergeFile = codecs.open(fileName, "r", "utf-8")
         print(unmergeFile.read())
         unmergeFile.close()
