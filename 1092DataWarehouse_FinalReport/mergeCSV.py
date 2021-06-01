@@ -8,7 +8,8 @@ os.chdir("..")
 parentDirPath = os.path.abspath(os.curdir)
 os.chdir(currentDirPath)
 
-currentDirName = currentDirPath - parentDirPath
+currentDirName = currentDirPath.replace(parentDirPath + "\\", "")
+# https://www.w3schools.com/python/ref_string_replace.asp
 print(currentDirName)
 
 # onlyfiles = [f for f in listdir()]
