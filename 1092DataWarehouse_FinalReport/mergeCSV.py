@@ -34,7 +34,18 @@ for fileName in onlyfiles:
         print("Not Weather Data")
     else:
         unmergeFile = codecs.open(fileName, "r", "utf-8")
-        print(unmergeFile.read())
+
+        unmergeFile.readline()
+        unmergeFile.readline()
+        # 前兩列為標題 直接儀器不使用
+
+        line = "start to read~"
+        while len(line) != 0:
+            line = unmergeFile.readline()
+            mergedFile.write("\"" + currentDirName + "\",\"")
+            mergedFile.write("日期")
+            mergedFile.write(line)
+
         unmergeFile.close()
 
 mergedFile.close()
