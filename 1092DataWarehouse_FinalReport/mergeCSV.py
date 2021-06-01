@@ -20,3 +20,11 @@ onlyfiles = [f for f in listdir(currentDirPath)
 
 for fileName in onlyfiles:
     print(fileName)
+
+mergedFileName = currentDirPath + "\\" + currentDirName + "Merged.csv"
+mergedFile = open(mergedFileName, "a")
+
+mergedFile.write("測站名稱","觀測日期","觀測時間(hour)","測站氣壓(hPa)","海平面氣壓(hPa)","氣溫(℃)","露點溫度(℃)","相對溼度(%)","風速(m/s)","風向(360degree)","最大陣風(m/s)","最大陣風風向(360degree)","降水量(mm)","降水時數(hr)","日照時數(hr)","全天空日射量(MJ/㎡)","能見度(km)","紫外線指數","總雲量(0~10)\n")
+mergedFile.write("StnName","ObsDate","ObsTime","StnPres","SeaPres","Temperature","Td dew point","RH","WS","WD","WSGust","WDGust","Precp","PrecpHour","SunShine","GloblRad","Visb","UVI","Cloud Amount\n")
+
+mergedFile.close()
