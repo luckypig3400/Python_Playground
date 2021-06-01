@@ -35,6 +35,10 @@ for fileName in onlyfiles:
     else:
         unmergeFile = codecs.open(fileName, "r", "utf-8")
 
+        dateList = fileName.split("-")
+        date = fileName.replace(".csv", "")
+        date = date.replace((dateList[0] + "-"), "")
+
         unmergeFile.readline()
         unmergeFile.readline()
         # 前兩列為標題 直接儀器不使用
@@ -43,7 +47,7 @@ for fileName in onlyfiles:
         while len(line) != 0:
             line = unmergeFile.readline()
             mergedFile.write("\"" + currentDirName + "\",\"")
-            mergedFile.write("日期")
+            mergedFile.write(date + "\",")
             mergedFile.write(line)
 
         unmergeFile.close()
