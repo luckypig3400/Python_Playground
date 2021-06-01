@@ -1,4 +1,6 @@
 import os
+from os import listdir
+from os.path import isfile, join
 
 currentDirPath = os.path.abspath(os.curdir)
 print(currentDirPath)
@@ -12,4 +14,9 @@ currentDirName = currentDirPath.replace(parentDirPath + "\\", "")
 # https://www.w3schools.com/python/ref_string_replace.asp
 print(currentDirName)
 
-# onlyfiles = [f for f in listdir()]
+onlyfiles = [f for f in listdir(currentDirPath)
+             if isfile(join(currentDirPath, f))]
+# https://stackoverflow.com/questions/3207219/how-do-i-list-all-files-of-a-directory
+
+for fileName in onlyfiles:
+    print(fileName)
