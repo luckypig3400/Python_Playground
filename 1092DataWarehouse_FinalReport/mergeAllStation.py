@@ -30,25 +30,20 @@ mergedFile.write(u"\"StnName\",\"ObsDate\",\"ObsTime\",\"StnPres\",\"SeaPres\",\
 for fileName in onlyfiles:
     print(fileName)
 
-    if fileName == (currentDirName + "Merged.csv") or fileName == "mergeCSV.py":
+    if fileName == (currentDirName + "Merged.csv") or fileName == "mergeAllStation.py":
         print("Not Weather Data")
     else:
         unmergeFile = codecs.open(fileName, "r", "utf-8")
 
-        dateList = fileName.split("-")
-        date = fileName.replace(".csv", "")
-        date = date.replace((dateList[0] + "-"), "")
-
         unmergeFile.readline()
         unmergeFile.readline()
-        # 前兩列為標題 直接儀器不使用
+        # 前兩列為標題 直接遺棄不使用
 
         mergedFile.write("\n")  # 在寫入每個檔案前換行
         line = unmergeFile.readline()
         while len(line) != 0:  # https://www.coder4.com/archives/3101
-            mergedFile.write("\"" + currentDirName + "\",\"")
-            mergedFile.write(date + "\",")
             mergedFile.write(line)
+            # 各站點檔案已經過mergedCSV.py處理過欄位，直接寫入即可
             line = unmergeFile.readline()
 
         unmergeFile.close()
