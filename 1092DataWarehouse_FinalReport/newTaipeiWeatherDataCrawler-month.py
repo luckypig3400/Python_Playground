@@ -53,7 +53,7 @@ for i in range(len(newTaipeiStations)):
 
     print(stationName + '的資料抓取參數為:' + queryParameters)
 
-    downloadSavePath = 'C:\\WeatherData\\newTaipei\\' + stationName  # 針對不同站點儲存在不同資料夾
+    downloadSavePath = 'C:\\WeatherData\\newTaipei-Month\\' + stationName  # 針對不同站點儲存在不同資料夾
     options = webdriver.ChromeOptions()
     prefs = {'download.default_directory': downloadSavePath}
     options.add_experimental_option('prefs', prefs)
@@ -61,23 +61,25 @@ for i in range(len(newTaipeiStations)):
     driver = webdriver.Chrome('C:\\[Git_Repos]\\Python_Playground\\chromeDriver-win32\\chromedriver.exe',
                               options=options)
 
-    startDate = datetime.datetime(2020, 1, 1)  # 設定要抓取資料的日期起點
+    startDate = datetime.datetime(2020, 1, 1)  # 設定要抓取資料的日期起點(月)
     # https://www.w3schools.com/python/python_datetime.asp
-    totalDaysYouWannaFetch = 365  # 設定要抓取的份數
+    totalDaysYouWannaFetch = 12  # 設定要抓取的份數(月)
 
     # 以下開始抓取該站點1年份的資料,可更改365為其他天數(抓取自訂的天數)
     for fetchCount in range(totalDaysYouWannaFetch):
         dateString = str(startDate.date())
-        # print('Current crawling:' + dateString)
+        dateString = dateString[:-3] # 移除後面三個字元(把日期移掉)
+        # https://stackoverflow.com/questions/15478127/remove-final-character-from-string
+        print('Current crawling:' + dateString)
 
-        url = 'https://e-service.cwb.gov.tw/HistoryDataQuery/DayDataController.do?command=' + queryParameters + '&datepicker=' + dateString
+        url = 'https://e-service.cwb.gov.tw/HistoryDataQuery/MonthDataController.do?command=' + queryParameters + '&datepicker=' + dateString
         driver.get(url)
 
         csvFile = driver.find_element_by_id('downloadCSV')
         csvFile.click()
         time.sleep(0.3)
 
-        startDate += datetime.timedelta(days=1)
+        startDate += datetime.timedelta(days=31) # 一次增加一個月(雖然都用31天不太準確但是很方便)
         # https://stackoverflow.com/questions/3240458/how-to-increment-a-datetime-by-one-day
 
     driver.close()
